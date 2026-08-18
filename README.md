@@ -943,3 +943,62 @@ GitHub API
 ```
 
 Permitiendo que un agente de IA consulte y modifique GitHub utilizando herramientas controladas, validadas y testeadas.
+
+# ¿Por qué es útil?
+
+Este proyecto permite ejecutar operaciones habituales de GitHub mediante lenguaje natural utilizando un agente de IA conectado mediante MCP.
+
+Casos de uso:
+
+- Consultar repositorios públicos y privados.
+- Crear nuevos repositorios.
+- Crear y consultar issues.
+- Crear archivos o modificar contenido y registrarlo mediante commits.
+- Automatizar tareas habituales de GitHub desde un agente de IA.
+- Integrar GitHub con aplicaciones compatibles con Model Context Protocol.
+
+# Requisitos del sistema
+
+- Node.js 18 o superior
+- npm
+- Git
+- Cuenta de GitHub
+- GitHub Personal Access Token
+- Google Antigravity para utilizar el MCP mediante lenguaje natural
+
+> Se recomienda utilizar Node.js 18 o superior para asegurar compatibilidad con las dependencias y el SDK de Model Context Protocol utilizados en el proyecto.
+
+## create_repository
+
+- `name`: `string` - nombre del repositorio.
+- `description`: `string` opcional - descripción del repositorio.
+
+## create_issue
+
+- `owner`: `string` - usuario u organización propietaria.
+- `repo`: `string` - nombre del repositorio.
+- `title`: `string` - título del issue.
+- `body`: `string` opcional - descripción del issue.
+
+## list_repositories
+
+- `type`: `enum` - `all`, `owner`, `public`, `private` o `member`.
+- `sort`: `enum` - `created`, `updated`, `pushed` o `full_name`.
+
+## list_issues
+
+- `owner`: `string` - usuario u organización propietaria.
+- `repo`: `string` - nombre del repositorio.
+
+## create_commit
+
+- `owner`: `string` - usuario u organización propietaria.
+- `repo`: `string` - nombre del repositorio.
+- `branch`: `string` - rama del repositorio. Por defecto `main`.
+- `filePath`: `string` - ruta del archivo.
+- `fileContent`: `string` - contenido del archivo.
+- `commitMessage`: `string` - mensaje del commit.
+
+# Licencia
+
+Este proyecto se distribuye bajo la licencia MIT.
