@@ -14,14 +14,17 @@ export function makeGitHubOperations(github: GitHubClient) {
   return {
 
     // Lista los repositorios del usuario autenticado
-    async listRepositories() {
-      const response = await requestWithRetry("GET /user/repos", {
-        type: "all",
-        sort: "updated",
-      });
+async listRepositories(
+  type: "all" | "owner" | "public" | "private" | "member" = "all",
+  sort: "created" | "updated" | "pushed" | "full_name" = "updated"
+) {
+  const response = await requestWithRetry("GET /user/repos", {
+    type,
+    sort,
+  });
 
-      return response.data;
-    },
+  return response.data;
+},
 
     // Crea un repositorio
     async createRepository(name: string, description?: string) {

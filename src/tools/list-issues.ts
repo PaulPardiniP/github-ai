@@ -20,16 +20,29 @@ export async function handleListIssues(
   const input = listIssuesSchema.parse(args);
 
   const issues = await operations.listIssues(
-    input.owner,
-    input.repo
-  );
+  input.owner,
+  input.repo
+) as Array<{
+  number: number;
+  title: string;
+  state: string;
+  html_url: string;
+  body: string | null;
+}>;
 
-  return {
-    content: [
-      {
-        type: "text" as const,
-        text: JSON.stringify(issues, null, 2),
-      },
-    ],
-  };
+const result = issues.map((issue) => ({
+  number: issue.number,
+  title: issue.title,
+  url: issue.html_url,
+  description: issue.body,
+}));
+
+return {
+  content: [
+    {
+      type: "text" as const,
+      text: JSON.stringify(result, null, 2),
+    },
+  ],
+}; 
 }

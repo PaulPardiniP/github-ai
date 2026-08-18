@@ -114,7 +114,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       content: [
         {
           type: "text",
-          text: JSON.stringify(result),
+          text: result.error.message,
         },
       ],
       isError: true,

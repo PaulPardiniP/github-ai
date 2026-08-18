@@ -38,16 +38,18 @@ export function toToolError(
 ) {
 
   // Error de validación de Zod
-  if (err instanceof ZodError) {
-    return {
-      ok: false,
-      error: {
-        type: "invalid_input",
-        message: "Los datos enviados no cumplen con los requisitos.",
-        details: err.issues,
-      },
-    };
-  }
+if (err instanceof ZodError) {
+  return {
+    ok: false,
+    error: {
+      type: "invalid_input",
+      message:
+        err.issues[0]?.message ??
+        "Los datos enviados no cumplen con los requisitos.",
+      details: err.issues,
+    },
+  };
+}
 
 
   // Obtenemos status si viene de GitHub
